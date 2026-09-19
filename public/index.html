@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Doremi · move to make music</title>
+<link rel="icon" href="logo.svg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+</head>
+<body>
+<video id="cam" autoplay playsinline muted></video>
+<div class="vignette"></div>
+<canvas id="scene"></canvas>
+
+<header class="top">
+  <div class="brand"><img class="logo" src="logo.svg" alt="" width="40" height="40" /> Doremi <span class="tag">music you play with your body</span></div>
+  <div id="status" class="status">Waking up the camera…</div>
+</header>
+
+<section id="intro" class="panel side">
+  <p class="eyebrow">hi there ✨</p>
+  <h1>How's your heart today?</h1>
+  <div class="moods">
+    <button class="mood" data-preset="calm"><span class="emoji">🌊</span><b>Calm</b></button>
+    <button class="mood" data-preset="uplift"><span class="emoji">🌤️</span><b>Uplift</b></button>
+    <button class="mood" data-preset="focus"><span class="emoji">🍃</span><b>Focus</b></button>
+    <button class="mood" data-preset="release"><span class="emoji">🌙</span><b>Release</b></button>
+    <button class="mood" data-preset="wake"><span class="emoji">☀️</span><b>Wake up</b></button>
+    <button class="mood" data-preset="wind"><span class="emoji">🌌</span><b>Wind down</b></button>
+    <button class="mood" data-preset="play"><span class="emoji">🎈</span><b>Play</b><small>for kids</small></button>
+    <button class="mood ask" id="askTile"><span class="emoji">✨</span><b>Ask Claude</b></button>
+  </div>
+  <textarea id="mood" rows="2" placeholder="or tell Claude in your own words… e.g. tense before an interview, mind racing"></textarea>
+  <div class="row">
+    <button id="design" class="primary">✨ Let Claude compose my session</button>
+  </div>
+
+  <div id="journey" class="journey hidden">
+    <div class="jhead"><b>Your journey</b><span id="jsummary"></span></div>
+    <svg id="jspark" viewBox="0 0 240 44" preserveAspectRatio="none"></svg>
+    <p id="jnote" class="jnote"></p>
+    <div class="jrow">
+      <button id="exportCsv" class="mini">📋 Export CSV · therapist view</button>
+      <button id="clearHistory" class="mini">Clear</button>
+    </div>
+  </div>
+
+  <p class="hint">♪ left side plucks the harp · ♫ right side holds chords · nod for a heartbeat · tilt to move the sound · smile for sparkles</p>
+  <p class="access">Works seated, one-handed, and with no controller. Two people in frame become a duet. There are no wrong notes.</p>
+</section>
+
+<aside id="hud" class="hud hidden">
+  <p class="eyebrow" id="hudModel">Session</p>
+  <h2 id="sceneName">Calm Waters</h2>
+  <p id="duetHud" class="badge hidden">👯 Duet mode · two of you in frame</p>
+  <p id="sceneWhy" class="why"></p>
+  <p id="guidance" class="guidance"></p>
+  <ul class="meters">
+    <li><span>😌 calm</span><b><i id="mCalm"></i></b></li>
+    <li><span>♪ left hand</span><b><i id="mLeft"></i></b></li>
+    <li><span>♫ right hand</span><b><i id="mRight"></i></b></li>
+  </ul>
+  <p id="balance" class="balance"></p>
+  <button id="end" class="ghost">Finish session</button>
+</aside>
+
+<section id="reflection" class="panel hidden">
+  <p class="eyebrow">that was lovely 💛</p>
+  <h1 id="reflectTitle">Here's what I noticed</h1>
+  <p id="duetBadge" class="badge hidden">👯 Duet session</p>
+  <div id="stats" class="stats"></div>
+  <p id="reflectText" class="reflect">Claude is listening back to your session…</p>
+  <div id="playback" class="playback hidden">
+    <audio id="audioPlayer" controls></audio>
+    <a id="downloadLink" class="mini" download="doremi-session.webm">⬇ Save the music you made</a>
+  </div>
+  <div class="row"><button id="again" class="primary">Play again</button></div>
+</section>
+
+<div class="legend">♪ note plucked &nbsp; 𝄞 chord change &nbsp; ♥ nod &nbsp; ♡ you smiled</div>
+<div class="keys">h swap sides · [ ] nod sensitivity · f fullscreen · esc finish</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
